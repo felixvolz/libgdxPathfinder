@@ -21,7 +21,7 @@ public class CameraHelper {
     }
 
 
-    float lerp = 0.1f;
+    float lerp = 0.5f; //the higher towards 1.0, the more the camera lags/floats behind
     public void update(float deltaTime) {
         if (!hasTarget()) return;
         if(null == target.goal) return;

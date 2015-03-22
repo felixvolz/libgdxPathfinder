@@ -192,7 +192,7 @@ public class TiledApp extends ApplicationAdapter    {
 
 
 
-    int fps = 15;
+    int fps = 4;
 
     private long diff, start = System.currentTimeMillis();
 
@@ -208,9 +208,24 @@ public class TiledApp extends ApplicationAdapter    {
             start = System.currentTimeMillis();
         }
     }
+
+    public boolean act(){
+        diff = System.currentTimeMillis() - start;
+        long targetDelay = 1000/fps;
+
+        if (diff < targetDelay) {
+            return false;
+        }
+
+        start = System.currentTimeMillis();
+        return true;
+    }
+
     byte tickCount = 0;
     byte vehicleUpdateDelay = 4;
     public void render () {
+
+        //TODO restrict framerate but smooth camera
 //       /sleep(fps);
 
         Gdx.gl.glClearColor(1, 0, 0, 1);
@@ -224,25 +239,25 @@ public class TiledApp extends ApplicationAdapter    {
 
 
        tiledMapRenderer.setView((OrthographicCamera)stage.getCamera());
+
+        //draw layers UNDER our players
         ((BatchTiledMapRenderer)tiledMapRenderer).render(new int[]{0,1});
-        if (tickCount++ % vehicleUpdateDelay == 0) {
-          //  pathManager.tick();
+       // if (tickCount++ % vehicleUpdateDelay == 0) {
+        if (act()){
+            pathManager.tick(); //TODO turned off baddy while figuring out camera smoothing
             stage.act(Gdx.graphics.getDeltaTime());
 
-            if(debug) {
-                 cameraHelper.applyTo((OrthographicCamera) stage.getCamera());
-                 cameraHelper.update(Gdx.graphics.getDeltaTime());
-            }
 
         }
 
         if(debug) {
             navGraph.render((OrthographicCamera) stage.getCamera());
-            // cameraHelper.applyTo((OrthographicCamera) stage.getCamera());
-             //cameraHelper.update(Gdx.graphics.getDeltaTime());
+            cameraHelper.applyTo((OrthographicCamera) stage.getCamera());
+             cameraHelper.update(Gdx.graphics.getDeltaTime());
         }
         stage.draw();
 
+        //draw layers OVER our players (e.g. tree tops/clouds)
         ((BatchTiledMapRenderer)tiledMapRenderer).render(new int[]{2,3,4});
         //debugging only
         //navGraph.render(camera);
