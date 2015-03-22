@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="20" tileheight="20" nextobjectid="17">
+ <tileset firstgid="1" name="background" tilewidth="20" tileheight="20">
+  <image source="background.png" width="80" height="60"/>
+ </tileset>
+ <tileset firstgid="13" name="skull" tilewidth="20" tileheight="20">
+  <image source="skull.png" width="40" height="20"/>
+  <tile id="0">
+   <properties>
+    <property name="frame" value="0"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="frame" value="1"/>
+   </properties>
+   <animation>
+    <frame tileid="0" duration="250"/>
+    <frame tileid="1" duration="250"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="15" name="dragonball" tilewidth="20" tileheight="20">
+  <image source="dragonball.png" width="100" height="20"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="200"/>
+    <frame tileid="1" duration="200"/>
+    <frame tileid="2" duration="200"/>
+    <frame tileid="3" duration="200"/>
+    <frame tileid="4" duration="200"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="20" name="gotenku" tilewidth="20" tileheight="30">
+  <image source="gotenku.png" width="20" height="120"/>
+  <tile id="0">
+   <properties>
+    <property name="agent" value="player"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="24" name="monster" tilewidth="30" tileheight="30">
+  <image source="monster.png" width="30" height="210"/>
+  <tile id="0">
+   <properties>
+    <property name="agent" value="baddy"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="31" name="background-transparent" tilewidth="20" tileheight="20">
+  <image source="background-transparent.png" width="80" height="60"/>
+ </tileset>
+ <tileset firstgid="43" name="bowser_walk" tilewidth="35" tileheight="45">
+  <image source="bowser_walk.png" width="175" height="180"/>
+  <tile id="0">
+   <properties>
+    <property name="agent" value="player"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="63" name="bowser_walk_v2" tilewidth="35" tileheight="45">
+  <image source="bowser_walk_v2.png" width="560" height="315"/>
+  <tile id="64">
+   <animation>
+    <frame tileid="64" duration="100"/>
+    <frame tileid="65" duration="100"/>
+    <frame tileid="66" duration="100"/>
+    <frame tileid="67" duration="100"/>
+    <frame tileid="68" duration="100"/>
+    <frame tileid="69" duration="100"/>
+    <frame tileid="70" duration="100"/>
+    <frame tileid="71" duration="100"/>
+    <frame tileid="72" duration="100"/>
+    <frame tileid="73" duration="100"/>
+    <frame tileid="74" duration="100"/>
+    <frame tileid="75" duration="100"/>
+    <frame tileid="76" duration="100"/>
+    <frame tileid="77" duration="100"/>
+    <frame tileid="77" duration="100"/>
+    <frame tileid="78" duration="100"/>
+    <frame tileid="79" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="96">
+   <animation>
+    <frame tileid="80" duration="300"/>
+    <frame tileid="96" duration="100"/>
+    <frame tileid="97" duration="100"/>
+    <frame tileid="98" duration="100"/>
+    <frame tileid="99" duration="100"/>
+    <frame tileid="100" duration="200"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer name="background" width="10" height="10">
+  <data encoding="csv">
+12,12,12,12,12,12,12,12,12,12,
+12,0,0,12,0,0,12,0,0,12,
+12,12,12,12,12,12,12,12,0,12,
+12,0,0,12,12,12,12,12,0,12,
+12,12,12,12,12,12,12,0,0,12,
+12,0,0,12,0,0,12,12,12,12,
+12,0,0,12,12,12,12,0,0,0,
+12,12,12,12,12,12,12,12,12,12,
+12,0,0,0,0,0,0,0,12,12,
+12,12,12,12,12,12,12,12,12,12
+</data>
+ </layer>
+ <layer name="collision" width="10" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,5,5,0,5,5,0,8,8,0,
+0,0,0,0,0,0,0,0,8,0,
+0,5,5,0,0,0,0,0,8,0,
+0,0,0,0,0,0,0,8,8,0,
+0,5,5,0,6,7,0,0,0,0,
+0,5,5,0,0,0,0,9,9,9,
+0,0,0,0,0,0,0,0,0,0,
+0,1,10,11,10,11,10,11,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="sprite" width="10" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,24,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,15,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,43,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="foreground" width="10" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,32,33,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="animation" width="10" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,14,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>
