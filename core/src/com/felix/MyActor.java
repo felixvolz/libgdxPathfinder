@@ -34,9 +34,9 @@ public class MyActor extends Actor {
 
     stateOfMind brain; //used by  PathManager.determineStrategy
     public GridPoint2 goal;
-    GridPoint2 cellPos;
+    public GridPoint2 cellPos;
 
-    DefaultGraphPath<Node> path;
+    public DefaultGraphPath<Node> path;
 
     public MyActor(Animator sprite,GridPoint2 cellPos){
         this.sprite = sprite;

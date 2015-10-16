@@ -2,10 +2,16 @@ package com.felix.component;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.felix.MyActor;
 import com.felix.NodeFactory;
+
+/*
+//TODO make MyActor target.path a public method, maybe make path finding smoother (bit jerky)
+//TODO zoom
+ */
 
 public class CameraHelper {
 
@@ -23,16 +29,16 @@ public class CameraHelper {
 
     float lerp = 0.5f; //the higher towards 1.0, the more the camera lags/floats behind
     public void update(float deltaTime) {
-        if (!hasTarget()) return;
-        if(null == target.goal) return;
-Vector2 coords = target.getStage().stageToScreenCoordinates(new Vector2(target.goal.x * NodeFactory.TileMapDetails.tilewidth , target.goal.y * NodeFactory.TileMapDetails.tilewidth));
 
+        //default to players current location THEN try to trace future path
+        GridPoint2 targetCell  = target.cellPos;
+        int i = Math.min(target.path.getCount(),5); //dont want to look too far ahead as Camera may not head in the direction palyer is currently walking
+        if(target.path.getCount() > 1) {
+              targetCell = target.path.get(Math.max(--i, 1)).getPos();
+        }
 
-       // if(coords.y - 200 < 0 || coords.y + 200 > Gdx.graphics.getHeight())
-               position.y += (target.goal.y *  NodeFactory.TileMapDetails.tilewidth- position.y) * (deltaTime / lerp);
-
-       // if(coords.x - 200 < 0 || coords.x + 200 > Gdx.graphics.getWidth())
-            position.x += (target.goal.x *  NodeFactory.TileMapDetails.tilewidth - position.x)  * (deltaTime / lerp);
+        position.y += (targetCell.y *  NodeFactory.TileMapDetails.tilewidth- position.y) * (deltaTime / lerp);
+        position.x += (targetCell.x *  NodeFactory.TileMapDetails.tilewidth - position.x)  * (deltaTime / lerp);
 
     }
 

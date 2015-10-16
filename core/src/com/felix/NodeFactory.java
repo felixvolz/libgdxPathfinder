@@ -32,21 +32,24 @@ public class NodeFactory {
     public static NavGraph  createGraph(TiledMap tiledMap){
         TiledMapTileLayer tiledLayer =(TiledMapTileLayer) tiledMap.getLayers().get("background");
 
-        TileMapDetails.tilewidth  =  (Integer)tiledMap.getProperties().get("tilewidth");
-        TileMapDetails.tileheight  =  (Integer)tiledMap.getProperties().get("tileheight");
+    //    TileMapDetails.tilewidth  =  Integer.parseInt((String)tiledMap.getProperties().get("tilewidth")) ;
+    //    TileMapDetails.tileheight  = Integer.parseInt((String)tiledMap.getProperties().get("tileheight")) ;
 
+        TileMapDetails.tilewidth  =   (Integer)tiledMap.getProperties().get("tilewidth")  ;
+        TileMapDetails.tileheight  = (Integer)tiledMap.getProperties().get("tileheight")  ;
         return createGraph(tiledLayer);
     }
 
     public static MyActor getPlayerAgent(TiledMap tiledMap){
         TiledMapTileLayer spriteLayer = (TiledMapTileLayer) tiledMap.getLayers().get("sprite");
-
+        int cellsUp = spriteLayer.getHeight();
+        int cellsAcross = spriteLayer.getWidth();
 
         MyActor actor = null;
 
         outerloop:
-        for(int x = 0; x < 10; x++) {
-            for (int y = 0; y < 10 ; y++) {
+        for(int x = 0; x < cellsAcross; x++) {
+            for (int y = 0; y < cellsUp ; y++) {
                 TiledMapTileLayer.Cell cell = spriteLayer.getCell(x,y);
                 if(cell != null){
                     TiledMapTile tile = cell.getTile();
@@ -73,12 +76,13 @@ public class NodeFactory {
 
     public static MyActor getBaddyAgent(TiledMap tiledMap){
         TiledMapTileLayer spriteLayer = (TiledMapTileLayer) tiledMap.getLayers().get("sprite");
-
+        int cellsUp = spriteLayer.getHeight();
+        int cellsAcross = spriteLayer.getWidth();
         MyActor actor = null;
 
         outerloop:
-        for(int x = 0; x < 10; x++) {
-            for (int y = 0; y < 10 ; y++) {
+        for(int x = 0; x < cellsAcross; x++) {
+            for (int y = 0; y < cellsUp ; y++) {
                 TiledMapTileLayer.Cell cell = spriteLayer.getCell(x,y);
                 if(cell != null){
                     TiledMapTile tile = cell.getTile();

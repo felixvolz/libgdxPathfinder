@@ -127,7 +127,7 @@ public class TiledApp_old extends ApplicationAdapter    {
            skin = new Skin(Gdx.files.internal("C:/Users/fx/Downloads/libGDX - pathfinder/android/assets/data/uiskin.json"));
         }
         skin.getAtlas().getTextures().iterator().next().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-        skin.getFont("default-font").setMarkupEnabled(true);
+       // skin.getFont("default-font").setMarkupEnabled(true);
 
 //        table.debug();
 //        label = new Label(labelText, skin);

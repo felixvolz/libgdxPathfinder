@@ -1,1 +1,2 @@
-include 'desktop', 'android', 'core', ':html'
+include 'desktop', 'android', 'core', ':html', ':tests', ':gdx-ai', 'gdxai-test'
+include ':tiled-master.zip'

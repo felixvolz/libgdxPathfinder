@@ -2,6 +2,7 @@ package com.felix.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Camera;
@@ -109,11 +110,12 @@ public class TiledApp extends ApplicationAdapter    {
 
         stage = new Stage();
          TmxMapLoader.Parameters t = new TmxMapLoader.Parameters();
-         tiledMap = new TmxMapLoader().load("data/little_level.tmx");
+         //tiledMap = new TmxMapLoader().load("data/little_level.tmx");
+            tiledMap  = new TmxMapLoader().load("data/TMXMapWriterTest.tmx");
 
         navGraph = NodeFactory.createGraph(tiledMap);
         navGraph.setDebug(debug);
-        NavGraphActor navgraphActor = new NavGraphActor(200,200,navGraph);
+        NavGraphActor navgraphActor = new NavGraphActor(400,400,navGraph);
         MyActor playerAgent = NodeFactory.getPlayerAgent(tiledMap);
         MyActor baddyAgent = NodeFactory.getBaddyAgent(tiledMap);
         navgraphActor.addPlayer(playerAgent);
@@ -125,7 +127,7 @@ public class TiledApp extends ApplicationAdapter    {
         stage.addActor(navgraphActor);
         stage.setDebugAll(debug);
 
-        ((OrthographicCamera) stage.getCamera()).zoom = 0.8f;// 0.2f;
+        ((OrthographicCamera) stage.getCamera()).zoom = 0.2f;// 0.2f;
 
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1f);
         controller = new CameraController();
@@ -145,25 +147,25 @@ public class TiledApp extends ApplicationAdapter    {
 
         Gdx.input.setInputProcessor(im);
         tiledMapRenderer.setView((OrthographicCamera) stage.getCamera());
-        ((OrthographicCamera) stage.getCamera()).position.set(new Vector2(200,100), 0);
+        ((OrthographicCamera) stage.getCamera()).position.set(new Vector2(0,0), 0);
 
-//        Gdx.input.setInputProcessor(new InputMultiplexer(new InputAdapter() {
-//            public boolean touchDown (int screenX, int screenY, int pointer, int button) {
-//
-//
-//                //tiled
-////                int index = (viewports.indexOf(stage.getViewport(), true) + 1) % viewports.size;
-////                Gdx.app.log(TAG, names.get(index));
-////                Viewport viewport = viewports.get(index);
-////                stage.setViewport(viewport);
-////                resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-//                return false;
-//            }
-//
-//        }, stage));
+        Gdx.input.setInputProcessor(new InputMultiplexer(new InputAdapter() {
+            public boolean touchDown (int screenX, int screenY, int pointer, int button) {
+
+
+                //tiled
+//                int index = (viewports.indexOf(stage.getViewport(), true) + 1) % viewports.size;
+//                Gdx.app.log(TAG, names.get(index));
+//                Viewport viewport = viewports.get(index);
+//                stage.setViewport(viewport);
+//                resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                return false;
+            }
+
+        }, stage));
 
         cameraHelper = new CameraHelper();
-
+        cameraHelper.setTarget(playerAgent);
         //table
 //        Table table = new Table();
 //        stage.addActor(table);
@@ -225,8 +227,8 @@ public class TiledApp extends ApplicationAdapter    {
     byte vehicleUpdateDelay = 4;
     public void render () {
 
-        //TODO restrict framerate but smooth camera
-//       /sleep(fps);
+        //DONE restrict actions but smooth camera
+//       /sleep(fps); sleep causes slow framerate (which causes juddering camera tracking)
 
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
@@ -258,7 +260,7 @@ public class TiledApp extends ApplicationAdapter    {
         stage.draw();
 
         //draw layers OVER our players (e.g. tree tops/clouds)
-        ((BatchTiledMapRenderer)tiledMapRenderer).render(new int[]{2,3,4});
+       // ((BatchTiledMapRenderer)tiledMapRenderer).render(new int[]{2,3,4});
         //debugging only
         //navGraph.render(camera);
 

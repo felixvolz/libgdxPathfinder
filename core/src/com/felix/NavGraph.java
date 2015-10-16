@@ -121,22 +121,22 @@ public class NavGraph extends DefaultIndexedGraph<Node> {
     public void render(OrthographicCamera camera){
         if(!debug)return;
 
-        sr.setColor(Color.RED);
+        sr.setColor(Color.GREEN);
         sr.setProjectionMatrix(camera.combined);
         sr.begin(ShapeRenderer.ShapeType.Filled);
 
 
 
-        for(int x = 0; x < 10; x++){
-            for(int y = 0; y < 10; y++){
+        for(int x = 0; x < cellsAcross; x++){
+            for(int y = 0; y < cellsUp; y++){
                 node = getNodeByCoordinates(x, y);
                 connections = node.getConnections();
                 if(connections == null){continue;}
                 for(Connection<Node> connection: connections){
                     neighbour = connection.getToNode();
                     int index = neighbour.getIndex();
-                    int neighbourY =  (int)Math.floor(index / 10);
-                    int neighbourX = index % 10;
+                    int neighbourY =  (int)Math.floor(index / cellsAcross);
+                    int neighbourX = index % cellsUp;
 
                     sr.rectLine(x * width + offset, y * height + offset, neighbourX * width + offset, neighbourY * height + offset, 1);
                 }
@@ -156,8 +156,8 @@ public class NavGraph extends DefaultIndexedGraph<Node> {
                for(Connection<Node> connection: connections){
                    neighbour = connection.getToNode();
                    int index = neighbour.getIndex();
-                   int neighbourY =  (int)Math.floor(index / 10);
-                   int neighbourX = index % 10;
+                   int neighbourY =  (int)Math.floor(index / cellsAcross);
+                   int neighbourX = index % cellsUp;
 
                    sr.rectLine(x * width , y * height , x * width + 2 , y * height + 2, 4);
                }
