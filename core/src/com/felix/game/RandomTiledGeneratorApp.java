@@ -157,7 +157,7 @@ public class RandomTiledGeneratorApp extends ApplicationAdapter    {
 
 
 
-    int fps = 4;
+    int fps = 4; //tets
 
     private long diff, start = System.currentTimeMillis();
 
